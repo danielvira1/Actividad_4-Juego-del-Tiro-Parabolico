@@ -57,9 +57,20 @@ def move():
     for target in targets:
         target.x -= 0.5
 
+        # CAMBIO: envolver blancos fuera de pantalla
+    for target in targets:                               # CAMBIO
+        if not inside(target):                           # CAMBIO
+            target.x = 200                               # CAMBIO
+            target.y = randrange(-150, 150)              # CAMBIO   
+
     if inside(ball):
         speed.y -= 0.35
         ball.move(speed)
+    
+    # CAMBIO: reposicionar bala si salió
+    if not inside(ball):                                 # CAMBIO
+        ball.x, ball.y = -200, -200                      # CAMBIO
+        speed.x = speed.y = 0                            # CAMBIO
 
     dupe = targets.copy()
     targets.clear()
